@@ -2,8 +2,6 @@ const Password = require("../models/Password");
 const User = require("../models/User");
 const ErrorResponse = require("../utils/errorResponse");
 const crypto = require("crypto");
-const algorithm = 'aes-256-ctr';
-const secretKey = 'vOVH6sdmpNWjRRIqCc7rdxs01lwHzfr3';
 const iv = crypto.randomBytes(16);
 const sendEmail = require("../utils/sendEmail");
 
@@ -12,13 +10,6 @@ exports.getPrivateData = async (req, res, next) => {
         sucess: true,
         data: "You have got access to private route"
     })
-}
-
-const checkIfExists = async (id, app) => {
-    const addedPasswords = await User.findById(id).populate("apppasswords");
-    const appPasswords = addedPasswords.apppasswords;
-    const appName = appPasswords.filter(appPassword => appPassword.app === app);
-    return appName
 }
 
 exports.addPassword = async (req, res, next) => {
@@ -32,7 +23,7 @@ exports.addPassword = async (req, res, next) => {
             return next(new ErrorResponse("App name already exists", 400))
         }
 
-        const cipher = await crypto.createCipheriv(algorithm, secretKey, iv);
+        const cipher = await crypto.createCipheriv(process.env.ALGORITHM, process.env.SECRETKEY, iv);
 
         const encrypted = await Buffer.concat([cipher.update(password), cipher.final()]);
         const addPassword = await Password.create({
@@ -87,7 +78,7 @@ exports.getPassword = async (req, res, next) => {
         console.log(Password[0].iv, Password[0].content);
 
 
-        const decipher = crypto.createDecipheriv(algorithm, secretKey, Buffer.from(Password[0].iv, 'hex'));
+        const decipher = crypto.createDecipheriv(process.env.ALGORITHM, process.env.SECRETKEY, Buffer.from(Password[0].iv, 'hex'));
 
         const decrpyted = Buffer.concat([decipher.update(Buffer.from(Password[0].content, 'hex')), decipher.final()]);
 

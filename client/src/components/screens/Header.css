@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.header{
+    width: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: black;
+    opacity: 0.6;
+}
+
+.header .header-contents{
+    margin: 0 50px;
+    padding: 30px 10px;
+    position: relative;
+}
+
+.header .header-contents h3{
+    position: absolute;
+    color: white;
+    bottom: 10px;
+}
+
+.header .header-contents h3 .brand-name{
+    color: white;
+    text-decoration: none;
+    font-size: calc(2rem - 1vh);
+    text-transform: uppercase;
+}
+
+.header .header-contents .addpassword{
+    position: absolute;
+    right: 230px;
+    bottom: 10px;
+}
+
+.header .header-contents .getpasswords{
+    position: absolute;
+    right: 88px;
+    bottom: 10px;
+}
+
+.header .header-contents .logout{
+    color: white;
+    position: absolute;
+    right: 15px;
+    bottom: 10px;
+    cursor: pointer;
+}
+
+.header .header-contents .logout:hover{
+    color: rgb(245, 228, 228);
+}
+
+.header .header-contents p .link{
+    color: white;
+    text-decoration: none;
+}

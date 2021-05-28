@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.login-screen{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+
+.login-screen .imgBx{
+    position: relative;
+    width: 50%;
+    height: 100%;
+}
+
+.login-screen .imgBx:before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(225deg, #e91e63, #03a9f4);
+    z-index: 1;
+    mix-blend-mode: screen;
+}
+
+.login-screen .imgBx img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.login-screen .contentBx{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+}
+
+.login-screen .contentBx .formBx{
+    width: 50%;
+}
+
+.login-screen .contentBx .formBx h2{
+    color: #607d8b;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    border-bottom: 4px solid #ff4584;
+    display: inline-block;
+    letter-spacing: 1px;
+}
+
+.login-screen .contentBx .formBx .error-message{
+    color: red;
+    font-style: italic;
+}
+
+.login-screen .contentBx .formBx .inputBx{
+    margin-bottom: 20px;
+}
+.login-screen .contentBx .formBx .inputBx span{
+    font-size: 16px;
+    margin-bottom: 5px;
+    display: inline-block;
+    color: #607db8;
+    font-weight: 300;
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+.login-screen .contentBx .formBx .inputBx input{
+    width: 100%;
+    padding: 10px 20px;
+    outline: none;
+    font-weight: 400;
+    border: 1px solid #607d8b;
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: #607d8b;
+    background: transparent;
+    border-radius: 30px;
+}
+
+.login-screen .contentBx .formBx .inputBx input[type="submit"]{
+    background: #ff4584;
+    color: #fff;
+    outline: none;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.login-screen .contentBx .formBx .inputBx input[type="submit"]:hover{
+    background-color: #f53677;
+}
+
+.login-screen .contentBx .formBx .forgot-password .forgotLink{
+    text-decoration: none;
+    margin-bottom: 10px;
+    color: #607d8b;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.login-screen .contentBx .formBx .inputBx p{
+    color: #607d8b;
+}
+
+.login-screen .contentBx .formBx .inputBx p .signupLink{
+    text-decoration: none;
+    color: #ff4584;
+}
+
+@media (max-width: 1024px){
+    .login-screen .imgBx {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .login-screen .contentBx {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+    .login-screen .contentBx .formBx {
+        width: 100%;
+        padding: 40px;
+        background-color: rgb(225 225 225 / 0.9);
+        margin: 50px;
+    }
+}

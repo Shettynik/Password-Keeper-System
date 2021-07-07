@@ -5,7 +5,7 @@ const errorHandler = require("./middlewares/error");
 const cors = require("cors");
 const path = require("path");
 
-connectDB()
+connectDB();
 
 const app = express();
 

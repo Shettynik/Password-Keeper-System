@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from "axios";
 import "./AddAppPassword.css";
 import Header from './Header';
+import { axiosInstance } from '../../AxiosInstance';
 
 
 const AddAppPassword = ({ history }) => {
@@ -30,7 +30,7 @@ const AddAppPassword = ({ history }) => {
         console.log(localStorage.getItem("authToken"), localStorage.getItem("id"));
 
         try {
-            const { data } = await axios.post(`http://localhost:5000/api/private/addpassword/${localStorage.getItem("id")}`, { app, username, password }, config);
+            const { data } = await axiosInstance.post(`/api/private/addpassword/${localStorage.getItem("id")}`, { app, username, password }, config);
             setAppName("");
             setUsername("");
             setPassword("");

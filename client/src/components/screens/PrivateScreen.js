@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from "axios";
 import Header from './Header';
+import { axiosInstance } from '../../AxiosInstance';
 import Unauthorized from './403Unauth';
 
 const PrivateScreen = ({ history }) => {
@@ -23,7 +23,7 @@ const PrivateScreen = ({ history }) => {
             // console.log(match.params.id);
             // console.log(config);
             try {
-                const { data } = await axios.get("/api/private", config);
+                const { data } = await axiosInstance.get("/api/private", config);
                 setPrivateData(data.data);
             } catch (error) {
                 localStorage.removeItem("authToken");

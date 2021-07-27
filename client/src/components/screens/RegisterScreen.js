@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from "axios";
 import { Link } from "react-router-dom";
 import "./RegisterScreen.css";
 import Signup from "./signup.jpg";
+import { axiosInstance } from '../../AxiosInstance';
 
 const RegisterScreen = ({history}) => {
     const [username, setUsername] = useState("");
@@ -37,7 +37,7 @@ const RegisterScreen = ({history}) => {
         }
 
         try {
-            const {data} = await axios.post("http://localhost:5000/api/auth/register", {username, email, password}, config);
+            const {data} = await axiosInstance.post("http://localhost:5000/api/auth/register", {username, email, password}, config);
             console.log(data)
             localStorage.setItem("id", data.id);
             localStorage.setItem("authToken", data.token);

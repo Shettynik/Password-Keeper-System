@@ -1,8 +1,8 @@
-import axios from 'axios'
 import React, { useState, useEffect } from 'react';
 import { Popover, OverlayTrigger } from 'react-bootstrap';
 import Header from './Header';
 import "./GetAppNames.css";
+import { axiosInstance } from '../../AxiosInstance';
 
 const GetAppNames = ({ history }) => {
     const [passwords, setPasswords] = useState([]);
@@ -18,7 +18,7 @@ const GetAppNames = ({ history }) => {
 
     const getPassword = async (app) => {
         try {
-            const { data } = await axios.get(`http://localhost:5000/api/private/getpassword/${localStorage.getItem("id")}?app=${app}`, config);
+            const { data } = await axiosInstance.get(`/api/private/getpassword/${localStorage.getItem("id")}?app=${app}`, config);
             setmessage(data.data);
             setTimeout(() => {
                 setmessage("")
@@ -33,7 +33,7 @@ const GetAppNames = ({ history }) => {
 
     const getAppNames = async () => {
 
-        const { data } = await axios.get(`http://localhost:5000/api/private/getappnames/${localStorage.getItem("id")}`, config)
+        const { data } = await axiosInstance.get(`/api/private/getappnames/${localStorage.getItem("id")}`, config)
         setPasswords(data.data);
     }
 

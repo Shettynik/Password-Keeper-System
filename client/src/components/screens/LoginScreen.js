@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from "axios";
 import { Link } from "react-router-dom";
 import "./LoginScreen.css";
 import Login from "./login.jpg";
+import { axiosInstance } from '../../AxiosInstance';
 
 const LoginScreen = ({history}) => {
     const [email, setEmail] = useState("");
@@ -26,7 +26,7 @@ const LoginScreen = ({history}) => {
 
 
         try {
-            const {data} = await axios.post("/api/auth/login", { email, password}, config);
+            const {data} = await axiosInstance.post("/api/auth/login", { email, password}, config);
             console.log(data)
             localStorage.setItem("id", data.id);
             localStorage.setItem("authToken", data.token);

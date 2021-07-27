@@ -54,7 +54,6 @@ const AddAppPassword = ({ history }) => {
                     <h2>Add Password</h2>
                     {error && <span className="error-message">{error}</span>}
                     {message && <span className="success-message">{message}</span>}
-                    <p>Seems like you have forgotten your password for Password Keeper. If its true please enter the email address associated with the account.</p>
                     <form onSubmit={apppasswordHandler} className="formEmailBx" >
                         <div className="inputBx">
                             <input type="text" required placeholder="App name" value={app} onChange={(e) => { setAppName(e.target.value) }} />

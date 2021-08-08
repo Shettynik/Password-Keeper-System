@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import {Alert} from 'react-bootstrap';
 import "./LoginScreen.css";
 import Login from "./login.jpg";
 import { axiosInstance } from '../../AxiosInstance';
@@ -34,14 +35,15 @@ const LoginScreen = ({history}) => {
             history.push("/")
 
         } catch (error) {
-            setError(`Error: ${error}`)
+            setError(`Email or password is incorrect`)
             setTimeout(() => {
                 setError("")
-            }, 5000);
+            }, 7000);
         }
     }
 
     return (
+
         <div className="login-screen">
             <div className="imgBx">
                 <img src={Login} alt="loginimage"/>
@@ -49,7 +51,7 @@ const LoginScreen = ({history}) => {
             <div className="contentBx">
                 <div className="formBx">
                     <h2>Login</h2>
-                    {error && <span className="error-message">{error}</span>}
+                    {error && <div className="error-message" style={{marginBottom: "5px"}}><Alert variant='danger'>{error}</Alert></div>}
                     <form onSubmit={LoginHandler} >
                         <div className="inputBx">
                             <span>Email</span>

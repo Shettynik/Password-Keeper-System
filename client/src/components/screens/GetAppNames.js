@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Popover, OverlayTrigger } from 'react-bootstrap';
+import { Alert } from 'react-bootstrap';
 import Header from './Header';
 import "./GetAppNames.css";
 import { axiosInstance } from '../../AxiosInstance';
@@ -19,15 +19,15 @@ const GetAppNames = ({ history }) => {
     const getPassword = async (app) => {
         try {
             const { data } = await axiosInstance.get(`/api/private/getpassword/${localStorage.getItem("id")}?app=${app}`, config);
-            setmessage(data.data);
+            setmessage(`${app.toUpperCase()} password sent to your registered email`);
             setTimeout(() => {
                 setmessage("")
-            }, 5000)
+            }, 10000)
         } catch (error) {
             seterror(error);
             setTimeout(() => {
                 seterror("")
-            }, 5000)
+            }, 10000)
         }
     }
 
@@ -44,28 +44,16 @@ const GetAppNames = ({ history }) => {
 
         getAppNames()
     }, [history]);
-
-    const popover = (
-        <Popover id="popover-basic">
-            <Popover.Title as="h3">{"Success!!" ? message : "Error"}</Popover.Title>
-            <Popover.Content>
-                {message ? message : error}
-            </Popover.Content>
-        </Popover>
-    );
-
     return (
         <div className="getpasswords-screen">
             <Header />
+            {message && <div className="error-message"><Alert variant='success'>{message}</Alert></div>}
+            {error && <div className="error-message"><Alert variant='danger'>{error}</Alert></div>}
             <div className="contentBx">
                 <div className="buttonsBx">
                     {passwords && passwords.map((password) => {
                         return <div id={password._id} className="btnBx">
-
-                            <OverlayTrigger trigger="focus" placement="right" overlay={popover}>
-                                <button onClick={() => { getPassword(password.app) }} >{password.app}</button>
-                            </OverlayTrigger>
-
+                            <button onClick={() => { getPassword(password.app) }} >{password.app}</button>
                         </div>
                     })}
                 </div>

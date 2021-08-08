@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { axiosInstance } from '../../AxiosInstance';
 import "./ForgotPasswordScreen.css"
+import { Alert } from 'react-bootstrap';
 
 const ForgotPasswordScreen = () => {
     const [error, setError] = useState("");
@@ -17,12 +18,13 @@ const ForgotPasswordScreen = () => {
         };
 
         try {
-            const {data} = await axiosInstance.post("/api/auth/forgotpassword", {email}, config);
+            const { data } = await axiosInstance.post("/api/auth/forgotpassword", { email }, config);
             setSuccess(data.data);
+            setEmail("");
 
         } catch (error) {
             // setError(error.response.data.message);
-            setError(`Error: ${error.response}`)
+            setError(`Email not found`)
             setEmail("");
             setTimeout(() => {
                 setError("")
@@ -32,19 +34,21 @@ const ForgotPasswordScreen = () => {
 
     return (
         <div className="forgotpassword-screen">
+
             <div className="contentBx">
+
                 <div className="formBx">
+                    {success && <div className="error-message"><Alert variant='success'>Please check your email and go to the provided link to reset your password</Alert></div>}
+                    {error && <div className="error-message"><Alert variant='danger'>{error}</Alert></div>}
                     <h2>Forgot Password</h2>
-                    {error && <span className="error-message">{error}</span>}
-                    {success && <span className="success-message">{success}</span>}
                     <p>Seems like you have forgotten your password for Password Keeper. If its true please enter the email address associated with the account.</p>
                     <form onSubmit={forgotpasswordHandler} className="formEmailBx" >
                         <div className="emailBx">
-                            <input type="email" placeholder="Email Id" required value={email} onChange={(e) => {setEmail(e.target.value)}} />
+                            <input type="email" placeholder="Email Id" required value={email} onChange={(e) => { setEmail(e.target.value) }} />
                         </div>
                         <div className="submitBx">
                             <input type="submit" value="submit" />
-                        </div>                
+                        </div>
                     </form>
                 </div>
             </div>

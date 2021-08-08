@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import "./AddAppPassword.css";
 import Header from './Header';
 import { axiosInstance } from '../../AxiosInstance';
+import {Alert} from 'react-bootstrap';
 
 
 const AddAppPassword = ({ history }) => {
@@ -27,7 +28,7 @@ const AddAppPassword = ({ history }) => {
             }
         }
 
-        console.log(localStorage.getItem("authToken"), localStorage.getItem("id"));
+        // console.log(localStorage.getItem("authToken"), localStorage.getItem("id"));
 
         try {
             const { data } = await axiosInstance.post(`/api/private/addpassword/${localStorage.getItem("id")}`, { app, username, password }, config);
@@ -37,29 +38,30 @@ const AddAppPassword = ({ history }) => {
             setMessage(data.data)
             setTimeout(() => {
                 setMessage("")
-            }, 5000);
+            }, 7000);
         } catch (error) {
-            setError(`Error: ${error}`)
+            console.log("error",error)
+            setError(`App name already exists`)
             setTimeout(() => {
                 setError("")
-            }, 5000);
+            }, 7000);
         }
     }
 
     return (
         <div className="addpassword-screen">
             <Header />
+            {message && <div className="error-message"><Alert variant='success'>{message}</Alert></div>}
+            {error && <div className="error-message"><Alert variant='danger'>{error}</Alert></div>}
             <div className="contentBx">
                 <div className="formBx">
                     <h2>Add Password</h2>
-                    {error && <span className="error-message">{error}</span>}
-                    {message && <span className="success-message">{message}</span>}
                     <form onSubmit={apppasswordHandler} className="formEmailBx" >
                         <div className="inputBx">
                             <input type="text" required placeholder="App name" value={app} onChange={(e) => { setAppName(e.target.value) }} />
                         </div>
                         <div className="inputBx">
-                            <input type="text" value={username} placeholder="Username" onChange={(e) => { setUsername(e.target.value) }} />
+                            <input type="text" value={username} placeholder="Username or Email" onChange={(e) => { setUsername(e.target.value) }} />
                         </div>
                         <div className="inputBx">
                             <input type="password" required placeholder="Password" value={password} onChange={(e) => { setPassword(e.target.value) }} />

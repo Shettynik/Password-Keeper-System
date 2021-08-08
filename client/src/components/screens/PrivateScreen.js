@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import { axiosInstance } from '../../AxiosInstance';
 import Unauthorized from './403Unauth';
+import AddAppPassword from './AddAppPassword';
 
 const PrivateScreen = ({ history }) => {
     const [error, setError] = useState("");
@@ -50,7 +51,7 @@ const PrivateScreen = ({ history }) => {
     //         <Link to="/addPassword">Add Password</Link>
     //         <Link to="/getAppNames">Get App Names</Link>
     //     </>)
-    return error ? <Unauthorized /> : <Header history={history}/>
+    return error ? <Unauthorized /> : <AddAppPassword history={history} />
 }
 
 export default PrivateScreen;

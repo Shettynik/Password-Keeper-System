@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import { Alert } from 'react-bootstrap';
 import "./RegisterScreen.css";
 import Signup from "./signup.jpg";
 import { axiosInstance } from '../../AxiosInstance';
@@ -31,13 +32,13 @@ const RegisterScreen = ({history}) => {
             setConfirmPassword("");
             setTimeout(() => {
                 setError("")
-            }, 5000);  // We want to remove the error after five seconds
+            }, 7000);  // We want to remove the error after five seconds
             return setError("Passwords do not match")
 
         }
 
         try {
-            const {data} = await axiosInstance.post("http://localhost:5000/api/auth/register", {username, email, password}, config);
+            const {data} = await axiosInstance.post("/api/auth/register", {username, email, password}, config);
             console.log(data)
             localStorage.setItem("id", data.id);
             localStorage.setItem("authToken", data.token);
@@ -46,6 +47,7 @@ const RegisterScreen = ({history}) => {
 
         } catch (error) {
             // setError(error.response.data.message);
+            console.log(error)
             setError(`Error: ${error}`)
             setTimeout(() => {
                 setError("")
@@ -61,7 +63,7 @@ const RegisterScreen = ({history}) => {
             <div className="contentBx">
                 <div className="formBx">
                     <h2>Signup</h2>
-                    {error && <span className="error-message">{error}</span>}
+                    {error && <div className="error-message" style={{marginBottom: "5px"}}><Alert variant='danger'>{error}</Alert></div>}
                     <form onSubmit={registerHandler} >
                         <div className="inputBx">
                             <span>Email</span>

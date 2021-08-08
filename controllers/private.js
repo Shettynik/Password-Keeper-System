@@ -46,7 +46,7 @@ exports.addPassword = async (req, res, next) => {
         });
 
     } catch (error) {
-        next(new ErrorResponse(error.message, 500));
+        next(new ErrorResponse("Something went wrong! Please try again later!", 500));
     }
 }
 
@@ -75,7 +75,6 @@ exports.getPassword = async (req, res, next) => {
         const addedPasswords = await User.findById(id).populate("apppasswords");
         const appPasswords = addedPasswords.apppasswords;
         const Password = appPasswords.filter(appPassword => appPassword.app === app);
-        console.log(Password[0].iv, Password[0].content);
 
 
         const decipher = crypto.createDecipheriv(process.env.ALGORITHM, process.env.SECRETKEY, Buffer.from(Password[0].iv, 'hex'));
@@ -83,7 +82,6 @@ exports.getPassword = async (req, res, next) => {
         const decrpyted = Buffer.concat([decipher.update(Buffer.from(Password[0].content, 'hex')), decipher.final()]);
 
         const message = `The requested password for your ${app} account is ${decrpyted.toString()}`;
-
         try {
             await sendEmail({
                 to: user.email,

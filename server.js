@@ -14,7 +14,7 @@ app.use(express.static(path.join(__dirname, "/client/build")))
 
 app.use(cors({
     // origin: 'http://localhost:3000',
-    origin: 'http://ec2-54-234-159-103.compute-1.amazonaws.com',
+    origin: 'http://ec2-3-239-164-171.compute-1.amazonaws.com',
     credentials: true
     }));
 app.use("/api/auth", require("./routes/auth"));

@@ -61,7 +61,7 @@ exports.forgotpassword = async(req, res, next) => {
 
         await user.save();
 
-        const resetUrl = `http://ec2-54-234-159-103.compute-1.amazonaws.com/passwordreset/${resetToken}`;
+        const resetUrl = `http://ec2-3-239-164-171.compute-1.amazonaws.com/passwordreset/${resetToken}`;
 
         const message = `
         <h1>You have requested for a password reset</h1>
